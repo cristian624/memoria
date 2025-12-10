@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Objetos</title>
+    <link rel="stylesheet" type="text/css" href="objetos.css">
+</head>
+<body>
+    <!-- Fondo estelar -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Marcador -->
+    <div class="score">
+        <div>Aciertos: <span id="correct-count">0</span></div>
+        <div>Errores: <span id="incorrect-count">0</span></div>
+    </div>
+
+   
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Pantalla de inicio -->
+        <div id="start-screen" class="screen active">
+            <h1>Test de Memoria Objeto</h1>
+            <div class="instructions">
+                <p>Bienvenido al test de memoria Objeto. En este ejercicio evaluarás tu capacidad para recordar imágenes que verás brevemente.</p>
+                <p><strong>Instrucciones:</strong></p>
+                <ol>
+                    <li>Primero verás una serie de 24 Objeto durante 4 segundos cada una.</li>
+                    <li>Después, responderás preguntas sobre si ciertas Objeto estaban en la lista original.</li>
+                    <li>Selecciona "Sí" si crees que la Objeto estaba en la lista original, o "No" si no estaba.</li>
+                </ol>
+                <p>¡Concéntrate y responde lo mejor que puedas!</p>
+            </div>
+            <div class="user-input" style="display: none;" >
+                <input type="text" id="username" placeholder="Ingresa tu nombre" value="Default" >
+            </div>
+            <div class="btn-container">
+                <button id="start-btn">Comenzar Test</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de memorización -->
+        <div id="memorization-screen" class="screen">
+            <h2>Memoriza estos Objeto</h2>
+            <div class="instructions">
+                <p>Observa atentamente esta imagen. En 4 segundos pasará automáticamente a la siguiente.</p>
+            </div>
+			<div class="image-container">
+                <img id="memorization-img" class="memorization-image" src="" alt="Imagen a memorizar">
+            </div>
+             <!-- Temporizador -->
+           <div class="timer" id="timer">4</div>
+        </div>
+
+        <!-- Pantalla de preguntas  -->
+        <div id="question-screen" class="screen">
+            <h2 id="question-title">Memoria Objeto</h2>
+            <p id="question-text" class="QuestionInstru"></p>
+            <div class="image-container">
+                <img id="question-img" class="question-image" src="" alt="Imagen de pregunta">
+            </div>
+            <div class="alternatives">
+                <div class="alternative" data-value="Si">Sí</div>
+                <div class="alternative" data-value="No">No</div>
+            </div>
+        </div>
+
+        <!-- Pantalla de resultados -->
+        <div id="results-screen" class="screen">
+            <h2>Resultados</h2>
+            <div class="results">
+                <div class="result-item">Nombre: <span id="result-name"></span></div>
+                <div class="result-item">Aciertos: <span id="result-correct"></span></div>
+                <div class="result-item">Errores: <span id="result-incorrect"></span></div>
+                <div class="result-item">Porcentaje: <span id="result-percentage"></span>%</div>
+                <div class="result-item" id="result-message"></div>
+            </div>
+            <div class="btn-container">
+                <button id="save-btn">Guardar Resultados</button>
+                <button id="restart-btn">Reiniciar Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio para efectos de sonido -->
+    <audio id="background-music" loop>
+        <source src="background.mp3" type="audio/mp3">
+    </audio>
+    <audio id="correct-sound">
+        <source src="correct.mp3" type="audio/mp3">
+    </audio>
+    <audio id="incorrect-sound">
+        <source src="incorrect.mp3" type="audio/mp3">
+    </audio>
+    <audio id="transition-sound">
+        <source src="transition.mp3" type="audio/mp3">
+    </audio>
+   <script src="usuarioContador.js"></script>
+   <script src="objeto.js"></script>
+</body>
+</html>

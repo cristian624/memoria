@@ -1,0 +1,89 @@
+Crea un sitio web educativo html, javascript y css con la dinámica de preguntas y respuestas de contenido partes de la memoria. Es importante que me entregues el código completo. Que permitir que los estudiantes aprendan a través de la interacción de preguntas con niveles cognitivos superiores (análisis, evaluación e interpretación).
+
+Aspectos Técnicos y de Diseño:
+Tecnología:
+El código debe estar organizado en clases y funciones, tales como:
+Clase para usuarios.
+Clase para el bloque de pregunta (que incluya el enunciado y las alternativas).
+Clase para gestionar la retroalimentación.
+Clase para el fondo estelar y música background.mp3.
+
+Diseño Visual:
+
+Se dibuja un diseño moderno y air combate.
+Fondo: Fondo espacial futurista dibujadas aleatoriamente para simular un cielo estrellado.
+Integrar efectos de sonido: archivo: background.mp3.
+
+Mecánica y Dinámica:
+El manejo de respuestas correctas e incorrectas, y la retroalimentación. Para implementar esas características, necesitarás agregar JavaScript para manejar la lógica y mejorar la experiencia del usuario.
+
+El código resultante debe incorporar las siguientes funcionalidades:
+
+Bloque de Pregunta: Contiene serie de números para RECORDAR y para responder utilizar una caja de texto donde se compara la respuesta correcta en recuadros coloridos.
+
+Cada bloque de pregunta contiene:
+2 series de números a recordar, con sus cajas de texto de respuestas.
+Cajas de texto en recuadros, borde amarrillo y fondos de colores brillantes (por ejemplo, Hot Blue, Spring Green, Orange, Gold).
+
+Presentación de las palabras a recordar:
+ El objetivo es familiarizarte con las secuencias de números en 4 segundos y luego respondes en una caja de texto espera 20 segundos, el bloque desaparecerá.
+
+Interacción y Retroalimentación:
+Interacción:
+Si es correcta la respuesta, se suma un acierto, esperando 1 segundo antes de cargar la siguiente pregunta numérica, si es incorrecta se incrementa el contador de errores se guarda en localstage o sqlite3.
+
+
+Marcador y Resultados:
+En una esquina (por ejemplo, la superior izquierda) se muestra un contador de respuestas correctas e incorrectas.
+Al finalizar se debe permitir guardar los resultados.
+Todos los archivos de sonido deben estar en la misma carpeta que el script (o en una subcarpeta definida) y cargarse mediante rutas relativas. 
+
+Sección A: si realiza este examen solo lea cada secuencia o que alguien lo lea secuencias de numérica una vez, por 4  segundos para que la memoricé, luego anote lo que memorizo en el espacio respuesta de una caja de texto y luego presione el botón aceptar para comparta con lo ingresado, este resultados se acumulan ya sea en preguntas correctas o incorrectas .
+
+Secuencia de números del examen:
+preguntas secuencia: [ "8 3" ,  "2 9" ]
+respuestas correcta ingresa en la cajas de texto :  [ "8 3 " ,  "2 9" ] 
+preguntas secuencia: [ "6 9 2" , "6 1 7"]
+respuestas correcta ingresa en la cajas de texto :   [ "6 9 2" , "6 1 7" ]
+preguntas secuencia: [ "5 7 3 4" , "8 6 0 9"]
+respuestas correcta ingresa en la cajas de texto :  [ "5 7 3 4" , "8 6 0 9"]
+preguntas secuencia: [ "1 8 6 3 9" , "2 7 4 5 6"]
+respuestas correcta ingresa en la cajas de texto :  [ "1 8 6 3 9" , "2 7 4 5 6"]
+preguntas secuencia: [ "7 2 5 9 4 8" , "0 8 3 1 2 5"]
+respuestas correcta ingresa en la cajas de texto :  [ "7 2 5 9 4 8" , "0 8 3 1 2 5"]
+preguntas secuencia: [ "2 9 8 3 5 7 6", "3 9 8 6 5 2 7"]
+respuestas correcta ingresa en la cajas de texto :  [ "2 9 8 3 5 7 6", "3 9 8 6 5 2 7"]
+preguntas secuencia: [ "8 7 9 0 2 6 1 4", "8 2 7 3 9 5 4 0"]
+respuestas correcta ingresa en la cajas de texto :  [ "8 7 9 0 2 6 1 4", "8 2 7 3 9 5 4 0"]
+preguntas secuencia: [ "3 5 2 7 9 6 2 3 0", "7 2 8 4 1 3 0 2 6"]					
+respuestas correcta ingresa en la cajas de texto :  [ "3 5 2 7 9 6 2 3 0", "7 2 8 4 1 3 0 2 6"]
+
+Sección B: Lee la secuencia de números siguiendo las mismas instrucciones que en la Sección A. Sin embargo, escribe en la caja de texto los números en orden inverso. Por ejemplo, la secuencia 1-2 se escribiría 2-1.
+
+pregunta secuencia: [ "1 3" , "2 9"]
+respuestas correcta ingresa en la cajas de texto :  [ "3 1" , "9 2"]
+
+pregunta secuencia: [ "2 8 7","5 0 8"]
+respuestas correcta ingresa en la cajas de texto : [ "7 8 2","8 0 5"]
+
+pregunta secuencia: [ "9 7 8 6","7 4 2 4"]
+respuestas correcta ingresa en la cajas de texto : [ "6 8 7 9", "4 2 4 7"]
+
+
+pregunta secuencia: [ "1 8 6 3 9" , "9 1 2 6 8"]
+respuestas correcta ingresa en la cajas de texto : ["9 3 6 8 1","8 6 2 1 9"]
+
+pregunta secuencia: [ "7 2 5 9 4 8", "0-8-3-1-2-5"]
+respuestas correcta ingresa en la cajas de texto : ["8 4 9 5 2 7" , "5 2 1 3 8 0" ]
+
+pregunta secuencia: [ "3 0 4 2 7 1 8","3 5 4 1 2 8 0" ]
+respuestas correcta ingresa en la cajas de texto : ["8 1 7 2 4 0 3", "0 8 2 1 4 5 3"]
+
+pregunta secuencia: [ "6 9 7 4 1 3 7 8" , "8 2 7 3 9 5 4 0"]
+respuestas correcta ingresa en la cajas de texto : ["8 7 3 1 4 7 9 6","0 4 5 9 3 7 2 8"]
+
+Finalización:
+Completadas las preguntas: Si se responden correctamente todas las preguntas, se muestra una pantalla final con el puntaje y "¡Felicidades! Has completado las preguntas. Botón para reiniciar o para guardar resultados."
+Marcador: Se muestra en pantalla el contador de aciertos e incorrectos.
+Resultados: Opción de guardar los resultados según el usuario.
+Sonidos y Música

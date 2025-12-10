@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Visual - Test Educativo</title>
+    <link rel="stylesheet" type="text/css" href="imagen.css">
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    
+	      <div class="score">
+               <div class="score-item correct"> Aciertos:<span id="correct-count" class="score-value">0</span></div>
+               <div class="score-item incorrect"> Errores:<span id="incorrect-count" class="score-value">0</span></div>
+               <div> Preguntas:<span id="question-count" class="score-value">0/0</span></div>
+              
+        </div>
+	
+	
+    <div class="container">
+        <header>
+            <h1>Memoria Visual</h1>
+           
+        </header>
+        
+        <div class="instructions">
+            <p><strong>Instrucciones:</strong> Observa cada imagen durante diez segundos. Estudia cada detalle. Intenta recordar todo lo que puedas sobre la imagen. Luego, pasa la página y responde las preguntas sobre esa escena. Tómate unos cinco segundos para responder cada pregunta.</p>
+            <p>Si no sabes la respuesta después de cinco segundos, pasa a la siguiente pregunta.</p>
+                <div class="user-input" style="display: none;" >
+                      <input type="text" id="username" placeholder="Ingresa tu nombre" value="Default" >
+                </div>           
+		   <button id="start-btn" class="btn">Comenzar Test</button>
+        </div>
+        
+       
+        
+        <div id="image-container" class="image-container hidden">
+		   <img id="current-image" src="" alt="Imagen para memorizar">
+            <div id="image-timer" class="timer">10</div>
+			<div class="titles"><h4>Test de Observación y Memoria</h4></div>
+        </div>
+        
+        <div id="question-container" class="question-container hidden">
+           
+           	<div id="question-text" class="question-text"></div>
+            <div id="alternatives-container" class="alternatives-container"></div>
+        </div>
+        
+        <div id="feedback-container" class="feedback-container">
+            <div id="feedback-title" class="feedback-title"></div>
+            <div id="feedback-text" class="feedback-text"></div>
+            <button id="next-btn" class="btn">Continuar</button>
+        </div>
+    </div>
+    
+    <div id="final-screen" class="final-screen">
+        <div class="final-content">
+            <h2 class="final-title">¡Test Completado!</h2>
+            <div class="final-stats">
+                <p>Aciertos: <span id="final-correct">0</span></p>
+                <p>Errores: <span id="final-incorrect">0</span></p>
+                <p>Porcentaje: <span id="final-percentage">0%</span></p>
+            </div>
+           
+            <div class="final-buttons">
+                <button id="restart-btn" class="btn btn-secondary">Reiniciar Test</button>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="background-music" loop>
+        <source src="background.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
+     <script src="usuarioContador.js"></script>
+    <script src="imagen.js"></script>
+</body>
+</html>

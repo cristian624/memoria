@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento de Memoria Numérica</title>
+    <link rel="stylesheet" type="text/css" href="numericas.css">
+</head>
+<body>
+    <div id="stars-container"></div>
+    
+    <div class="score-container">
+        <div class="score correct">Aciertos: <span id="correct-count">0</span></div>
+        <div class="score incorrect">Errores: <span id="incorrect-count">0</span></div>
+    </div>
+
+    <div class="container">
+        <h1>Entrenamiento de Memoria Numérica</h1>
+        
+        <div id="start-screen" class="question-block">
+            <div class="instructions">
+                <p>Este ejercicio te ayudará a entrenar tu memoria numérica.</p>
+                <p>En cada nivel, verás una secuencia de números durante 4 segundos.</p>
+                <p>Luego deberás escribir la secuencia en el orden correcto.</p>
+                <p>¡Buena suerte!</p>
+		  </div>
+          <div class="user-input" style="display: none;" >
+                <input type="text" id="username" placeholder="Ingresa tu nombre" value="Default" >
+          </div>         
+               <button id="start-btn" class="btn btn-primary">Comenzar Entrenamiento</button>
+        </div>
+
+        <div id="game-screen" class="hidden">
+            <div id="section-title" class="section-title"></div>
+            <div id="question-block" class="question-block">
+                <div id="sequence-display" class="sequence-display"></div>
+                <div id="input-container" class="input-container hidden">
+                    <input type="text" id="answer-input" class="answer-input" placeholder="¿Cuál fue secuencia presentada?">
+                    <button id="submit-btn" class="btn btn-primary">Aceptar</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <div id="final-screen" class="final-screen hidden">
+            <h2>¡Completado!</h2>
+            <div class="final-score">Puntuación Final: <span id="final-score">0</span></div>
+            <div class="instructions">
+                <p>Has completado todas las preguntas del entrenamiento.</p>
+                <p>Tu memoria numérica está mejorando.</p>
+            </div>
+            <div class="input-container">
+                <button id="restart-btn" class="btn btn-primary">Reiniciar Entrenamiento</button>
+                <button id="save-btn" class="btn btn-secondary">Guardar Resultados</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="audio-control" id="audio-control">
+        <i>🔊</i>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="background.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script src="usuarioContador.js"></script>
+    <script src="numericas.js"></script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas de Memoria</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+        }
+
+        /* Fondo espacial futurista */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(125deg, #ffffff 0%, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ff6600;
+            border-radius: 50%;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Menú lateral */
+        .side-menu {
+            width: 280px;
+            background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px 0;
+            overflow-y: auto;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-header {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 20px;
+        }
+
+        .menu-header h2 {
+            color: #ff6600;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .menu-header p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .menu-items {
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item:hover {
+            background-color: #333;
+            border-left-color: #ff6600;
+        }
+
+        .menu-item.active {
+            background-color: #ff6600;
+            border-left-color: #ff3300;
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ff6600;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1000px;
+            margin-left: 300px;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff6600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #ff6600, transparent);
+        }
+
+        /* Secciones */
+        section {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 20px;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+		
+
+        h2 {
+            color: #ff6600;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #333;
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+         .user-section, .game-section, .stats-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+		 input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        /* Tipos de memoria */
+        .memory-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 5px solid #ff6600;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .memory-card h4 {
+            color: #ff6600;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .memory-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Pruebas de memoria */
+        .memory-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-top: 5px solid #ff6600;
+            text-align: center;
+        }
+
+        .test-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-card h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .test-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff6600;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #e55a00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
+        }
+
+        /* Efectos de sonido */
+        .sound-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6600;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .sound-control:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animaciones */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .side-menu {
+                transform: translateX(-100%);
+            }
+            
+            .side-menu.active {
+                transform: translateX(0);
+            }
+            
+            .container {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            .memory-types, .memory-tests {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menú lateral -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <h2>PRUEBAS DE MEMORIA</h2>
+            
+        </div>
+        <ul class="menu-items">
+        
+            <li class="menu-item active" data-target="pruebas">
+                <i class="fas fa-tasks"></i>
+                <span>Realizar Pruebas</span>
+            </li>
+            <a href="EvaIndex.html" style="color:white"> <li class="menu-item" data-target="introduccion">
+                <i class="fas fa-home"></i>
+                <span>Resultados</span>
+            </li></a>
+        </ul>
+    </nav>
+    
+    <!-- Fondo espacial -->
+    <div class="space-bg" id="spaceBg"></div>
+    
+    <!-- Control de sonido -->
+    <div class="sound-control" id="soundControl">
+        <span id="soundIcon">♪</span>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="container">
+        <header class="fade-in">
+            
+        </header>
+		             
+        <section id="pruebas" class="fade-in">
+         <h2 >Explora los tipos de memoria y evalúa tus capacidades</h2>
+              <!-- Sección de usuario -->
+        <div class="test-card">
+            <h3>Nombre Usuario</h3>
+            <input type="text" id="username" placeholder="Ingresa tu nombre de usuario">
+            <button onclick="cambiarUsuario()" class="neutral">Cambiar Usuario</button>
+            <p id="current-user">Usuario actual: No seleccionado</p>
+        </div>       
+
+	  	<h2>PRUEBAS DE MEMORIA</h2>
+            <p>A continuación encontrarás las seis pruebas que componen el Test de Memoria de Braverman. Te recomendamos realizarlas en orden y en un ambiente tranquilo donde puedas concentrarte.</p>
+            
+            <div class="memory-tests">
+			
+                <div class="test-card">
+                    <h4>PARTE 1: HISTORIAS</h4>
+                    <p>Evalúa tu capacidad para recordar información presentada en forma de historias.</p>
+                    <button class="btn" onclick="startTest(1)">Comenzar Prueba</button>
+                </div>
+                <div class="test-card">
+                    <h4>PARTE 2: OBJETOS</h4>
+                    <p>Mide tu capacidad para recordar objetos y sus características.</p>
+                    <button class="btn" onclick="startTest(2)">Comenzar Prueba</button>
+                </div>
+                <div class="test-card">
+                    <h4>PARTE 3: PARES</h4>
+                    <p>Evalúa tu memoria para asociaciones entre pares de elementos.</p>
+                    <button class="btn" onclick="startTest(3)">Comenzar Prueba</button>
+                </div>
+                <div class="test-card">
+                    <h4>PARTE 4: IMÁGENES</h4>
+                    <p>Prueba tu capacidad para recordar imágenes visuales.</p>
+                    <button class="btn" onclick="startTest(4)">Comenzar Prueba</button>
+                </div>
+                <div class="test-card">
+                    <h4>PARTE 5: NÚMEROS</h4>
+                    <p>Evalúa tu memoria para secuencias numéricas.</p>
+                    <button class="btn" onclick="startTest(5)">Comenzar Prueba</button>
+                </div>
+                <div class="test-card">
+                    <h4>PARTE 6: NÚMEROS Y LETRAS</h4>
+                    <p>Prueba tu capacidad para recordar combinaciones de números y letras.</p>
+                    <button class="btn" onclick="startTest(6)">Comenzar Prueba</button>
+                </div>
+            </div>
+        </section>
+		
+    </div>
+
+    <!-- Audio para efectos de sonido -->
+    <audio id="backgroundMusic" loop>
+        <source src="background.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+	<script src="usuario.js"></script>
+
+    <script>
+	
+        // Crear estrellas para el fondo espacial
+        function createStars() {
+            const spaceBg = document.getElementById('spaceBg');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Animación con retraso aleatorio
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                
+                spaceBg.appendChild(star);
+            }
+        }
+        
+        // Efecto de aparición gradual al hacer scroll
+        function fadeInOnScroll() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Control de sonido
+        function setupSoundControl() {
+            const soundControl = document.getElementById('soundControl');
+            const soundIcon = document.getElementById('soundIcon');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            let isPlaying = false;
+            
+            soundControl.addEventListener('click', () => {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    soundIcon.textContent = '♪';
+                } else {
+                    backgroundMusic.play().catch(e => {
+                        console.log("La reproducción automática fue bloqueada. Haz clic de nuevo.");
+                    });
+                    soundIcon.textContent = '♫';
+                }
+                isPlaying = !isPlaying;
+            });
+        }
+        
+        // Navegación del menú
+        function setupMenuNavigation() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const sections = document.querySelectorAll('section');
+            const menuToggle = document.getElementById('menuToggle');
+            const sideMenu = document.getElementById('sideMenu');
+            
+            // Alternar menú en dispositivos móviles
+            menuToggle.addEventListener('click', () => {
+                sideMenu.classList.toggle('active');
+            });
+            
+            // Navegación por clic en elementos del menú
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    // Remover clase active de todos los elementos
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    // Agregar clase active al elemento clickeado
+                    item.classList.add('active');
+                    
+                    // Desplazarse a la sección correspondiente
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    
+                    // Cerrar menú en móviles después de la selección
+                    if (window.innerWidth <= 1024) {
+                        sideMenu.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Resaltar elemento del menú según la sección visible
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-target') === current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Iniciar pruebas (simulación)
+        function startTest(testNumber) {
+		    // if (testNumber == 1){
+			//         window.open("HisIndex.html", "_blank");
+		    //        // alert(`Iniciando prueba ${testNumber} de memoria. En una implementación completa, aquí se cargaría la prueba específica.`);
+			//}		
+			
+			switch (testNumber) {
+                 case 1:
+                   // Code to execute if expression === value1
+				   window.open("HisIndex.html", "_blank");
+                   break;
+                 case 2:
+                   // Code to execute if expression === value2
+				   window.open("ObjIndex.html", "_blank");
+                   break;
+                 case 3:
+                   // Code to execute if expression === value3
+				    window.open("RecIndex.html", "_blank");
+                   break;
+				 case 4:
+                   // Code to execute if expression === value3
+				    window.open("ImgIndex.html", "_blank");
+                   break;
+                 case 5:
+                   // Code to execute if expression === value3
+				    window.open("SecIndex.html", "_blank");
+                 break;
+				 case 6:
+                   // Code to execute if expression === value3
+				    window.open("NumLetIndex.html", "_blank");
+                 break;
+                 default:
+                   // Code to execute if no case matches
+               }
+
+		
+        
+		}
+        
+        // Inicialización cuando se carga la página
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            setupSoundControl();
+            setupMenuNavigation();
+            fadeInOnScroll(); // Aplicar efecto inicial
+            
+            // Aplicar efecto al hacer scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+        });
+    </script>
+</body>
+</html>

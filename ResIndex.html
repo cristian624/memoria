@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Memoria de Braverman</title>
+    <style>
+        :root {
+            --primary-color: #FF6600;
+            --secondary-color: #333333;
+            --light-color: #FFFFFF;
+            --dark-color: #000000;
+            --gray-color: #F5F5F5;
+            --border-color: #E0E0E0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(0,0,0,0.05)" stroke-width="1"/></svg>');
+            background-size: 20px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary-color), #FF8C42);
+            color: var(--light-color);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .sections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .section {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 1.5rem;
+        }
+        
+        /* Estilos para la sección de Partes */
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .part-item {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .part-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .part-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .part-range {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .memory-type {
+            font-style: italic;
+            color: var(--secondary-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* Estilos para la sección de Totales */
+        .totals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .total-item {
+            padding: 20px;
+            background-color: var(--gray-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .total-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .total-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .neurotransmitter {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .total-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Estilos para la sección de Interpretación */
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .interpretation-item {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--gray-color);
+            transition: transform 0.3s;
+        }
+        
+        .interpretation-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .range {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        /* Estilos para controles */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        button:hover {
+            background-color: #E55A00;
+            transform: translateY(-2px);
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .audio-btn {
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .audio-btn:hover {
+            background-color: #555555;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--secondary-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Estilos para resultados destacados */
+        .excellent { color: #2E8B57 !important; }
+        .good { color: #4682B4 !important; }
+        .average { color: #DAA520 !important; }
+        .below-average { color: #CD5C5C !important; }
+        .poor { color: #B22222 !important; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .parts-grid, .totals-grid, .interpretation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Prueba de Memoria de Braverman</h1>
+            <p class="subtitle">Evaluación integral de capacidades de memoria</p>
+        </header>
+        
+        <div class="sections-container">
+            <!-- Sección de Partes -->
+            <section class="section">
+                <h2 class="section-title">Partes de la Prueba</h2>
+                
+                <div class="parts-grid">
+                    <div class="part-item">
+                        <div class="part-title">Parte 1: Historias</div>
+                        <div class="part-range">Rango: 0-68 puntos</div>
+                        <div class="input-group">
+                            <label for="part1">Puntuación:</label>
+                            <input type="number" id="part1" min="0" max="68" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria auditiva/inmediata</div>
+                    </div>
+                    
+                    <div class="part-item">
+                        <div class="part-title">Parte 2: Objetos</div>
+                        <div class="part-range">Rango: 0-48 puntos</div>
+                        <div class="input-group">
+                            <label for="part2">Puntuación:</label>
+                            <input type="number" id="part2" min="0" max="48" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria visual/inmediata</div>
+                    </div>
+                    
+                    <div class="part-item">
+                        <div class="part-title">Parte 3: Pares</div>
+                        <div class="part-range">Rango: 0-32 puntos</div>
+                        <div class="input-group">
+                            <label for="part3">Puntuación:</label>
+                            <input type="number" id="part3" min="0" max="32" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria auditiva/inmediata</div>
+                    </div>
+                    
+                    <div class="part-item">
+                        <div class="part-title">Parte 4: Imágenes</div>
+                        <div class="part-range">Rango: 0-52 puntos</div>
+                        <div class="input-group">
+                            <label for="part4">Puntuación:</label>
+                            <input type="number" id="part4" min="0" max="52" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria visual/inmediata</div>
+                    </div>
+                    
+                    <div class="part-item">
+                        <div class="part-title">Parte 5: Números</div>
+                        <div class="part-range">Rango: 0-30 puntos</div>
+                        <div class="input-group">
+                            <label for="part5">Puntuación:</label>
+                            <input type="number" id="part5" min="0" max="30" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria de trabajo</div>
+                    </div>
+                    
+                    <div class="part-item">
+                        <div class="part-title">Parte 6: Números y letras</div>
+                        <div class="part-range">Rango: 0-20 puntos</div>
+                        <div class="input-group">
+                            <label for="part6">Puntuación:</label>
+                            <input type="number" id="part6" min="0" max="20" placeholder="Ingrese puntuación">
+                        </div>
+                        <div class="memory-type">Memoria de trabajo/concentración</div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button id="calculate-btn">Calcular Resultados</button>
+                    
+                    <div class="audio-controls">
+                        <button class="audio-btn" id="audio-toggle">
+                            <span>🔊</span> Reproducir Música de Fondo
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección de Totales -->
+            <section class="section">
+                <h2 class="section-title">Totales Generales</h2>
+                
+                <div class="totals-grid">
+                    <div class="total-item">
+                        <div class="total-label">Memoria de trabajo</div>
+                        <div class="neurotransmitter">Dopamina (0-100)</div>
+                        <div class="total-value" id="total1">-</div>
+                    </div>
+                    
+                    <div class="total-item">
+                        <div class="total-label">Memoria inmediata</div>
+                        <div class="neurotransmitter">Acetilcolina (0-100)</div>
+                        <div class="total-value" id="total2">-</div>
+                    </div>
+                    
+                    <div class="total-item">
+                        <div class="total-label">Memoria auditiva/inmediata</div>
+                        <div class="neurotransmitter">GABA (0-100)</div>
+                        <div class="total-value" id="total3">-</div>
+                    </div>
+                    
+                    <div class="total-item">
+                        <div class="total-label">Memoria visual/inmediata</div>
+                        <div class="neurotransmitter">Serotonina (0-100)</div>
+                        <div class="total-value" id="total4">-</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección de Interpretación -->
+            <section class="section">
+                <h2 class="section-title">Interpretación de las Puntuaciones</h2>
+                
+                <div class="interpretation-grid">
+                    <div class="interpretation-item">
+                        <span class="range">90-100+</span>
+                        Capacidades de memoria excepcionales: tu memoria funciona a un nivel que pocos pueden alcanzar.
+                    </div>
+                    
+                    <div class="interpretation-item">
+                        <span class="range">75-90</span>
+                        Capacidades de memoria superiores a la media: el nivel mínimo de funcionamiento normal de la memoria.
+                    </div>
+                    
+                    <div class="interpretation-item">
+                        <span class="range">60-75</span>
+                        Capacidad de memoria promedio; puede indicar la posibilidad de una deficiencia temprana, ya que la mayoría de nosotros experimentamos una deficiencia en al menos uno de los componentes bioquímicos en todo momento.
+                    </div>
+                    
+                    <div class="interpretation-item">
+                        <span class="range">35-60</span>
+                        Capacidad de memoria inferior a la media: un indicio de una deficiencia de memoria existente que debe abordarse.
+                    </div>
+                    
+                    <div class="interpretation-item">
+                        <span class="range">0-35</span>
+                        Capacidad de memoria deficiente: un indicio de una deficiencia de memoria existente que debe abordarse.
+                    </div>
+                </div>
+                
+                <div class="interpretation-item" style="margin-top: 20px; font-style: italic; background-color: #FFF9E6; border-left: 4px solid #FFC107;">
+                    Si tu puntuación fue inferior a la que esperabas, no te desanimes. Puede haber muchas razones por las que tu memoria no esté funcionando bien actualmente. Recuerda que la deficiencia de memoria se puede tratar y, lo más importante, se puede revertir.
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>© 2023 Sitio Educativo - Prueba de Memoria de Braverman</p>
+        </footer>
+    </div>
+    
+    <audio id="background-music" loop>
+        <!-- En un entorno real, aquí iría la referencia al archivo background.mp3 -->
+        <!-- <source src="background.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const audioToggle = document.getElementById('audio-toggle');
+            const backgroundMusic = document.getElementById('background-music');
+            let isPlaying = false;
+            
+            // Calcular resultados
+            calculateBtn.addEventListener('click', function() {
+                // Obtener valores de entrada
+                const part1 = parseInt(document.getElementById('part1').value) || 0;
+                const part2 = parseInt(document.getElementById('part2').value) || 0;
+                const part3 = parseInt(document.getElementById('part3').value) || 0;
+                const part4 = parseInt(document.getElementById('part4').value) || 0;
+                const part5 = parseInt(document.getElementById('part5').value) || 0;
+                const part6 = parseInt(document.getElementById('part6').value) || 0;
+                
+                // Validar rangos
+                if (part1 < 0 || part1 > 68 || part2 < 0 || part2 > 48 || 
+                    part3 < 0 || part3 > 32 || part4 < 0 || part4 > 52 || 
+                    part5 < 0 || part5 > 30 || part6 < 0 || part6 > 20) {
+                    alert('Por favor, ingrese valores dentro de los rangos especificados.');
+                    return;
+                }
+                
+                // Calcular totales
+                const total1 = Math.min(100, (part5 + part6) * 2);
+                const total2 = Math.min(100, Math.round((part1 + part2 + part3 + part4) / 2));
+                const total3 = Math.min(100, part1 + part3);
+                const total4 = Math.min(100, part2 + part4);
+                
+                // Mostrar resultados
+                document.getElementById('total1').textContent = total1;
+                document.getElementById('total2').textContent = total2;
+                document.getElementById('total3').textContent = total3;
+                document.getElementById('total4').textContent = total4;
+                
+                // Resaltar resultados según interpretación
+                highlightResults(total1, 'total1');
+                highlightResults(total2, 'total2');
+                highlightResults(total3, 'total3');
+                highlightResults(total4, 'total4');
+            });
+            
+            // Función para resaltar resultados según interpretación
+            function highlightResults(score, elementId) {
+                const element = document.getElementById(elementId);
+                
+                // Remover clases previas
+                element.classList.remove('excellent', 'good', 'average', 'below-average', 'poor');
+                
+                // Aplicar clase según puntuación
+                if (score >= 90) {
+                    element.classList.add('excellent');
+                } else if (score >= 75) {
+                    element.classList.add('good');
+                } else if (score >= 60) {
+                    element.classList.add('average');
+                } else if (score >= 35) {
+                    element.classList.add('below-average');
+                } else {
+                    element.classList.add('poor');
+                }
+            }
+            
+            // Control de audio
+            audioToggle.addEventListener('click', function() {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    audioToggle.innerHTML = '<span>🔊</span> Reproducir Música de Fondo';
+                } else {
+                    backgroundMusic.play().catch(e => {
+                        console.log("La reproducción automática fue prevenida:", e);
+                        alert("Para reproducir música, haga clic en el botón nuevamente después de interactuar con la página.");
+                    });
+                    audioToggle.innerHTML = '<span>🔇</span> Pausar Música de Fondo';
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>

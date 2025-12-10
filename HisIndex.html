@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Espacial - Prueba de Comprensión</title>
+   <link rel="stylesheet" type="text/css" href="hist.css">
+</head>
+<body>
+    <div id="starfield"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">MEMORIA ESPACIAL</div>
+            <div class="score">
+                <div class="score-item correct">
+                    <span>Aciertos:</span>
+                    <span class="score-value" id="correct-count">0</span>
+                </div>
+                <div class="score-item incorrect">
+                    <span>Errores:</span>
+                    <span class="score-value" id="incorrect-count">0</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="instructions" id="instructions">
+                <h2 class="instructions-title">Instrucciones</h2>
+                <p class="instructions-text">
+                    Lea atentamente cada uno de las siguientes HISTORIA una vez. Esta prueba sería más efectiva si alguien más le leyera las HISTORIA lentamente. Después de cada HISTORIA, anote las respuestas a las preguntas. No lea las preguntas antes de leer el HISTORIA y no vuelva a consultar ninguna parte de la HISTORIA para responderlas. Si no puede responder alguna pregunta inmediatamente, omítala por completo; no vuelva a revisar las preguntas que no respondió una vez que haya terminado la prueba. Cuando haya respondido todas las preguntas, continúe con el siguiente HISTORIA.
+                </p>
+				<div class="user-input" style="display: none;" >
+                      <input type="text" id="username" placeholder="Ingresa tu nombre" value="Default" >
+                </div>
+                <button class="btn btn-primary" id="start-btn">Comenzar Prueba</button>
+            </div>
+            
+            <div class="story-container hidden" id="story-container">
+                <h2 class="story-title" id="story-title">Cuento 1</h2>
+                <p class="story-text" id="story-text"></p>
+                <div class="timer">
+                    Tiempo para memorizar: <span class="timer-value" id="memorize-timer">15</span> segundos
+                </div>
+            </div>
+            
+            <div class="question-container hidden" id="question-container">
+                <h2 class="question-text" id="question-text"></h2>
+                <div class="alternatives-container" id="alternatives-container">
+                    <!-- Las alternativas se generarán dinámicamente -->
+                </div>
+                 <!--<div class="timer">
+                    Tiempo para responder: <span class="timer-value" id="answer-timer">8</span> segundos
+                </div>-->
+            </div>
+            
+            <div class="feedback-container hidden" id="feedback-container">
+                <h2 class="feedback-title" id="feedback-title"></h2>
+                <p class="feedback-message" id="feedback-message"></p>
+                <p class="feedback-continue">Presiona C para continuar</p>
+            </div>
+            
+            <div class="final-screen hidden" id="final-screen">
+                <h2 class="final-title">¡Felicidades!</h2>
+                <p class="final-score">Has completado todas las preguntas.</p>
+                <p class="final-score">Aciertos: <span id="final-correct">0</span> | Errores: <span id="final-incorrect">0</span></p>
+				<div class="final-score">Porcentaje: <span id="result-percentage"></span>%</div>
+                <div class="final-buttons">
+                    <button class="btn btn-primary"  id="save-btn" >Guardar Resultados</button>
+                    <button class="btn btn-secondary" id="restart-btn">Reiniciar Prueba</button>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="background-music" loop>
+        <!-- El archivo background.mp3 se cargaría aquí -->
+    </audio>
+    <audio id="correct-sound">
+        <!-- El archivo correct.mp3 se cargaría aquí -->
+    </audio>
+    <audio id="incorrect-sound">
+        <!-- El archivo incorrect.mp3 se cargaría aquí -->
+    </audio>
+    <script src="usuarioContador.js"></script>
+    <script src="historias.js"></script>
+</body>
+</html>

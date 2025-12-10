@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Espacial - Entrenamiento Cognitivo</title>
+    <link rel="stylesheet" type="text/css" href="recuerdo.css">
+	
+</head>
+<body>
+    <div id="game-container">
+        <div id="stars-container"></div>
+        
+        <div id="score-display">
+            Aciertos: <span id="correct-count">0</span> | Errores: <span id="incorrect-count">0</span>
+        </div>
+        
+        <div id="start-screen" class="screen">
+            <h1>MEMORIA AUDITIVA E INMEDIATA </h1>
+            <p>Entrena tu memoria asociativa con este juego educativo. Memoriza pares de palabras y luego selecciona la correcta entre las alternativas. Por ejemplo, <span style="color:blue; font-weight:bold;"><b>"perro - manzana"</b></span> es un par de palabras. en la pregunta sadra <span style="color:green; font-weight:bold;"><b>"perro"</b></span> tendra opciones para escojer la correcta que seria <span style="color:green; font-weight:bold;"><b>"manzana"</b></span>.</p>
+            <div class="user-input" style="display: none;" >
+                <input type="text" id="username" placeholder="Ingresa tu nombre" value="Default" >
+            </div>         
+		 <button id="start-btn">INICIAR ENTRENAMIENTO</button>
+        </div>
+        
+        <div id="remember-screen" class="screen">
+            <h2>Memoriza estos pares de palabras</h2>
+            <div id="words-container"></div>
+            <div class="progress-bar">
+                <div id="remember-progress" class="progress"></div>
+            </div>
+            <p id="countdown">Tiempo restante: 15 segundos</p>
+        </div>
+		 
+        
+        <div id="question-screen" class="screen">
+            <h2>¿Cuál es la palabra asociada con?</h2>
+            <div id="question"></div>
+            <div id="alternatives-container"></div>
+        </div>
+        
+        <div id="results-screen" class="screen">
+            <h2>¡ENTRENAMIENTO COMPLETADO!</h2>
+            <p id="final-score">Puntuación: <span id="score-value">0</span>/<span id="total-questions">0</span></p>
+            <p id="performance-message"></p>
+            <button id="restart-btn">REINICIAR ENTRENAMIENTO</button>
+            <button id="save-results-btn">GUARDAR RESULTADOS</button>
+        </div>
+        
+        <div id="audio-control">
+            <i>♪</i>
+			<audio id="background-music" loop>
+               <source src="background.mp3" type="audio/mp3">
+            </audio>
+        </div>
+
+				
+    </div>
+    <script src="usuarioContador.js"></script>
+    <script src="recuerdos.js"></script>
+</body>
+</html>
