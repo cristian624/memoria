@@ -154,7 +154,7 @@
                 this.tests = this.initializeTests();
                 this.isRemembering = false;
                 this.rememberTimer = null;
-                this.rememberTime = 4; // 15 segundos para memorizar
+                this.rememberTime = 25; // 15 segundos para memorizar
                 this.timeLeft = this.rememberTime;
                 
                 this.initializeEventListeners();
