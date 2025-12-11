@@ -128,7 +128,7 @@
             }
             
             animateStar(star) {
-                const duration = Math.random() * 3 + 2;
+                const duration = Math.random() * 5 + 5;
                 const delay = Math.random() * 5;
                 
                 star.style.animation = `twinkle ${duration}s infinite ${delay}s`;

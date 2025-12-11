@@ -558,7 +558,7 @@
                 this.questionContainer.classList.add('hidden');
                 
                 this.isShowingImage = true;
-                let timeLeft = 10;
+                let timeLeft = 15
                 this.imageTimerElement.textContent = timeLeft;
                 
                 this.imageTimer = setInterval(() => {

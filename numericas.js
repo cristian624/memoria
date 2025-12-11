@@ -83,7 +83,7 @@
                 this.sequence = sequence;
                 this.correctAnswer = correctAnswer;
                 this.section = section;
-                this.displayTime = 4000; // 4 segundos
+                this.displayTime = 8000; // 4 segundos
             }
 
             displaySequence() {

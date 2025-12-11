@@ -124,7 +124,7 @@
                 this.sectionIndicator = document.getElementById('section-indicator');
                 this.progressBar = document.getElementById('progress-bar');
                 
-                this.displayTime = 4000; // 4 segundos para memorizar
+                this.displayTime = 8000; // 8 segundos para memorizar
                 this.answerTime = 30000; // 30 segundos para responder
                 this.displayTimer = null;
                 this.answerTimer = null;
