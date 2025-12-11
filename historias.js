@@ -200,13 +200,13 @@
                         "Reflexiona ",
                     ),
 		         new QuestionBlock(		
-                       	"9. ¿En qué fecha fue la próxima reunión de los Cub Scouts?",      
-                       	["decimotercero","decimosegundo","decimonoveno","decimo"],
-                        "decimonoveno",
+                       	"9. ¿A que Iglesia asistio?",      
+                       	["San Pablo","San Lucas","Dominicana","San Nicolas"],
+                        "San Pablo",
                         "Reflexiona "	
                     ),
 		         new QuestionBlock(		
-                       	"10. ¿Jacob ecibió la insignia de?",
+                       	"10. ¿Jacob recibió la insignia de?",
                        	["administrador","contador","reclutador","cajero"],
                         "reclutador",
                         "Reflexiona "	
@@ -231,13 +231,13 @@
                     ),
 		         new QuestionBlock(		
                        	"14. ¿A Jacob le gusta el helado con cuantas bolas?",           
-                       	["tres","Dos","cuatro","cinco"],
+                       	["tres","dos","cuatro","cinco"],
                         "dos",
                         "Reflexiona "	
                     ),
 		         new QuestionBlock(		
                        	"15. ¿Cuál era el sabor?", 
-                       	["fresa","Chocolate","limon","mango"],
+                       	["fresa","chocolate","limon","mango"],
                         "chocolate",
                         "Reflexiona "	
                     ),
