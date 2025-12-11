@@ -188,13 +188,13 @@
                         "Reflexiona "	
                     ),
 		         new QuestionBlock(		
-                       	"7. ¿asistió Andy a la reunión en que horario?",
+                       	"7. ¿Asistió Andy a la reunión en que horario?",
                        	["tarde","media noche","Noche","dia"],
                         "Noche",
                         "Reflexiona" 	
                     ),
 		         new QuestionBlock(		
-                       	"8. ¿En qué mes fue la siguiente reunión de los Cub Scouts?",       
+                       	"8. ¿En qué mes será la siguiente reunión de los Cub Scouts?",       
                        	["enero","marzo","octubre","noviembre"],
                         "octubre",
                         "Reflexiona ",
@@ -652,7 +652,7 @@
             storyContainer.classList.remove('hidden');
             
             // Iniciar temporizador para memorización
-            let timeLeft = 15;
+            let timeLeft = 25;
             document.getElementById('memorize-timer').textContent = timeLeft;
             
             memorizeTimer = setInterval(() => {
@@ -695,7 +695,7 @@
             questionContainer.classList.remove('hidden');
             
             // Iniciar temporizador para respuesta
-            let timeLeft = 8;
+            let timeLeft = 20;
             //document.getElementById('answer-timer').textContent = timeLeft;
             document.getElementById('answer-timer').classList.add('hidden');
            // answerTimer = setInterval(() => {
