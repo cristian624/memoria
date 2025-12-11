@@ -188,7 +188,7 @@
                         "Reflexiona "	
                     ),
 		         new QuestionBlock(		
-                       	"7. ¿asistió Andy en la reunión en que horario?",
+                       	"7. ¿asistió Andy a la reunión en que horario?",
                        	["tarde","media noche","Noche","dia"],
                         "Noche",
                         "Reflexiona" 	
