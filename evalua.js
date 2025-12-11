@@ -23,7 +23,7 @@
 		
 		
         // Control de audio
-        const audioControl = document.getElementById('audioControl');
+        
         let audioPlaying = false;
         
         // Crear elemento de audio
@@ -134,7 +134,7 @@
 				element.textContent = 'memoria superiores a la media';
             } else if (value >= 60) {
                 element.classList.add('range-60');
-				element.textContent = 'memoria promedio:posibilidad de una deficiencia temprana';
+				element.textContent = 'memoria promedio: posibilidad de una deficiencia temprana';
             } else if (value >= 35) {
                 element.classList.add('range-35');
 				element.textContent = 'indicio de una deficiencia de memoria';
@@ -148,21 +148,7 @@
 		
 		
 		
-        // Control de audio
-        audioControl.addEventListener('click', function() {
-            if (audioPlaying) {
-                audio.pause();
-                audioPlaying = false;
-                audioControl.style.backgroundColor = '#5A5A5A';
-            } else {
-                audio.play().catch(e => {
-                    console.log("Error al reproducir audio: ", e);
-                    // En un entorno real, aquí manejaríamos el error de reproducción
-                });
-                audioPlaying = true;
-                audioControl.style.backgroundColor = '#FF6B35';
-            }
-        });
+       
         
         // Añadir event listeners a los inputs
         part1Input.addEventListener('input', calculateTotals);
