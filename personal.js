@@ -276,7 +276,7 @@
                 {text:"Me resulta fácil cambiar; no estoy estancado en mis costumbres,",category:"2A",tipo:"PERSONALIDAD"},
                 {text:"Estoy profundamente en contacto con mis emociones,",category:"2A",tipo:"PERSONALIDAD"},
                 {text:"Tengo tendencia a amar a alguien un minuto y odiarlo al siguiente,",category:"2A",tipo:"PERSONALIDAD"},
-                {text:"Soy coqueta,",category:"2A",tipo:"PERSONALIDAD"},
+                {text:"Soy una persona coqueta,",category:"2A",tipo:"PERSONALIDAD"},
                 {text:"No me importa gastar dinero si beneficia mis relaciones,",category:"2A",tipo:"PERSONALIDAD"},
                 {text:"Tengo tendencia a fantasear cuando tengo sexo,",category:"2A",tipo:"PERSONALIDAD"},
                 {text:"Mis relaciones tienden a estar llenas de romance,",category:"2A",tipo:"PERSONALIDAD"},
