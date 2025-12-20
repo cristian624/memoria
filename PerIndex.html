@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de la Naturaleza de Braverman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="personal.css">
+</head>
+<body>
+    <!-- Fondo estrellado -->
+    <div id="starfield"></div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> EVALUACIÓN DE LA NATURALEZA DE BRAVERMAN</h1>
+            <p class="subtitle">Descubre tu naturaleza bioquímica dominante y posibles deficiencias a través de esta evaluación interactiva</p>
+			
+        </header>
+
+        <div class="section">
+            <div class="section-title" id="m1">
+                <i class="fas fa-info-circle"></i>
+                <span>Instrucciones Generales</span>
+            </div>
+            
+            <div class="instructions" id="m2">
+                <h3>¡Bienvenido a la evaluación!</h3>
+                <p>Ambas pruebas deben completarse en una sola sesión. Busque un lugar tranquilo donde no le distraiga la música, las actividades cercanas ni otras personas, y elija un momento en el que sepa que no le interrumpirán teléfonos, buscapersonas, faxes ni correos electrónicos. Por último, revise su estado físico. Posponga las pruebas si se siente particularmente indispuesto o si no ha descansado ni comido bien.</p>
+                <p>Lo más importante que debes recordar es que no hay respuestas correctas para esta evaluación. Naces con tu naturaleza: no hay mejor ni peor naturaleza. Todos tenemos fortalezas y debilidades. Así que no le des demasiadas vueltas a las preguntas ni respondas como lo harías en un mundo perfecto. Si quieres una visión real de tu salud general, responde con sinceridad.</p>
+            </div> 
+
+            <div class="part-selector"  id="ps">
+                 <button id="b1" class="part-btn color1" onclick="part1(1)" ><i class="fas fa-vial"></i>Parte 1: Naturaleza Dominante</button>
+				 <button id="b2" class="part-btn color2" onclick="part2(2)"><i class="fas fa-flask"></i>Parte 2: Deficiencias Bioquímicas</button>
+			</div>
+
+            
+
+            <div id="part1-instructions" class="instructions hidden">
+                <h3>Parte 1: Determinando tu Naturaleza Dominante</h3>
+                <p>Instrucciones: Responda cada pregunta (V) si es verdadero o (F) si es falso. Al final de cada grupo, anote solo el número total de afirmaciones verdaderas en el espacio provisto.</p>
+                <p>Responde las preguntas según cómo te sientes la mayor parte del tiempo. Por ejemplo, si has dormido mal y hoy te sientes cansado, responde las preguntas sobre tus niveles de energía según cómo te sientes en un día normal.</p>
+            </div>
+
+            <div id="part2-instructions" class="instructions hidden">
+                <h3>Parte 2: Definiendo tus Deficiencias</h3>
+                <p>Instrucciones: Responda cada pregunta marcando con un círculo V (verdadero) o F (falso). Al final de cada grupo, anote solo el número total de afirmaciones verdaderas en el espacio provisto.</p>
+                <p>La segunda evaluación determinará si tiene deficiencia de alguno de los cuatro componentes bioquímicos, incluyendo el que rige su naturaleza. Muchas de las preguntas se relacionan con síntomas que podría estar experimentando. Responda las preguntas según cómo se siente ahora mismo.</p>
+            </div>
+
+             
+
+            <div class="stats-container" style="display:none" >
+                <div class="stat-box" style="display:none">
+                    <div class="stat-value true-stat" id="true-count">0</div>
+                    <div class="stat-label">Respuestas Verdaderas</div>
+                </div>
+                <div class="stat-box" style="display:none">
+                    <div class="stat-value false-stat" id="false-count">0</div>
+                    <div class="stat-label">Respuestas Falsas</div>
+                </div>
+				
+                <div class="stat-box" style="display:none">
+                    <div class="stat-value" id="current-category">1A</div>
+                    <div class="stat-label">Categoría Actual</div>
+                </div>
+                <div class="stat-box" style="display:none">
+                    <div class="stat-value" id="category-true-count">0</div>
+                    <div class="stat-label">Verdaderos en Categoría</div>
+                </div>
+            </div>
+
+			 
+            <div id="qc" class="question-container hidden">
+			 <div class="btn">Categoría: <p id="category" >MEMORIA Y ATENCIÓN</p></div>
+                    
+            
+                <div class="question-text" id="question-text">Cargando pregunta...</div>
+                
+                <div class="bot">
+                    <button class="btn btn-secondary true-btn" id="true-btn">
+                          <span>Verdadero</span>
+                    </button>
+                    <button class="btn btn-secondary false-btn" id="false-btn">
+                         <span>Falso </span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="pc" class="progress-container hidden">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="question-counter" id="question-counter">Pregunta 1 de 50</div>
+            </div>
+            <div id="nv" class="navigation hidden" >
+                <button class="btn btn-secondary" id="prev-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Anterior</span>
+                </button>
+                <button class="btn btn-primary" id="next-btn">
+                    <span>Siguiente</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-primary" id="finish-btn" style="display: none;">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Ver Resultados</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección de resultados -->
+        <div class="section hidden" id="results-section">
+            <div class="results-container">
+                <h2 class="results-title">Resultados de la Evaluación</h2>
+                
+                <div id="part1-results" class="hidden">
+                    <h3 class="section-title">Parte 1: Naturaleza Dominante</h3>
+                    <div class="results-grid">
+                        <div class="result-card dopamine">
+                            <h3>Naturaleza Dopaminérgica</h3>
+                            <div class="result-score" id="dopamine-score">0</div>
+                            
+                        </div>
+                        <div class="result-card acetylcholine">
+                            <h3>Naturaleza Acetilcolina</h3>
+                            <div class="result-score" id="acetylcholine-score">0</div>
+                            
+                        </div>
+                        <div class="result-card gaba">
+                            <h3>Naturaleza GABA</h3>
+                            <div class="result-score" id="gaba-score">0</div>
+                            
+                        </div>
+                        <div class="result-card serotonin">
+                            <h3>Naturaleza Serotonina</h3>
+                            <div class="result-score" id="serotonin-score">0</div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="result-interpretation">
+                        <h3>Interpretación de Resultados - Parte 1</h3>
+                        <p>La categoría con el mayor número de respuestas verdaderas identificará tu naturaleza dominante. Una naturaleza dominante clásica suele tener una puntuación de 35 o más en cualquier categoría, lo que sugiere una vida desequilibrada.</p>
+                        <p>Nota: Cuando cualquier otra naturaleza tiene entre 10 y 15 puntos menos que la dominante, la naturaleza con la puntuación más baja probablemente presente una deficiencia relativa de por vida y necesite equilibrio incluso en épocas de buena salud.</p>
+                        <p id="dominant-nature-text">Tu naturaleza dominante aparecerá aquí después de completar la evaluación.</p>
+                    </div>
+                </div>
+                
+                <div id="part2-results" class="hidden">
+                    <h2 class="section-title">Parte 2: Deficiencias Bioquímicas</h2>
+					<h3 class="section-title">Total respuestas</h3>
+                    
+					<div class="results-grid">
+                        <div class="result-card dopamine">
+                            <h3 style="color:#E35336">Deficiencia de Dopamina</h3>
+                            <div class="result-score" id="dopamine-deficiency">0</div>
+                        </div>
+                        <div class="result-card acetylcholine">
+                            <h3 style="color:orange">Deficiencia de Acetilcolina</h3>
+                            <div class="result-score" id="acetylcholine-deficiency">0</div>
+                        </div>
+                        <div class="result-card gaba">
+                            <h3 style="color:purple">Deficiencia de GABA</h3>
+                            <div class="result-score" id="gaba-deficiency">0</div>
+                        </div>
+                        <div class="result-card serotonin">
+                            <h3 style="color:green">Deficiencia de Serotonina</h3>
+                            <div class="result-score" id="serotonin-deficiency">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-interpretation">
+                        <h3>Interpretación de Resultados - Parte 2</h3>
+                        <p>Cualquier categoría con hasta 5 afirmaciones verdaderas se considera una deficiencia leve. Cualquier categoría con entre 6 y 15 afirmaciones verdaderas se considera una deficiencia moderada. Si tiene más de 15 afirmaciones verdaderas en cualquier categoría, esto indica una deficiencia grave; le recomiendo que consulte a su médico lo antes posible.</p>
+                        <p id="deficiency-text">Tu nivel de deficiencia aparecerá aquí después de completar la evaluación.</p>
+                    </div>
+                </div>
+				
+				<div class="navigation">
+                    <button class="btn btn-secondary" id="toggle-results-btn">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Cambiar a Parte 2</span>
+                    </button>
+                    <button class="btn btn-primary" id="save-results-btn">
+                        <i class="fas fa-save"></i>
+                        <span>Guardar Resultados</span>
+                    </button>
+                    <button class="btn btn-secondary" id="restart-btn">
+                        <i class="fas fa-redo"></i>
+                        <span>Reiniciar Evaluación</span>
+                    </button>
+					<button class="btn btn-primary" id="preguntas-btn">
+                        <i class="fas fa-redo"></i>
+                        <span>Preguntas frecuentes</span>
+                    </button>
+                </div>
+                
+                <div id="save-message" class="hidden" style="margin-top: 20px; padding: 15px; background: rgba(29, 209, 161, 0.2); border-radius: var(--border-radius); border-left: 4px solid var(--success-color);">
+                    <p><i class="fas fa-check-circle"></i> Resultados guardados correctamente en localStorage.</p>
+                </div>
+            </div>
+				
+		
+				<div id="preguntas-message" class="result-interpretation hidden">
+				<h3>PREGUNTAS FRECUENTES</h3>
+				<p>A estas alturas, puede que tengas muchas preguntas sobre tu naturaleza. Aquí tienes algunas respuestas a las preguntas más frecuentes:</p>
+				<p><b>P. ¿Cómo puedo estar seguro de haber identificado mi naturaleza dominante ?</b></p>
+				<p>A. La Evaluación de la Naturaleza Braverman se basa en pruebas relacionadas con los temperamentos cerebrales y sus deficiencias, desarrolladas y perfeccionadas durante los últimos cincuenta años. Esta evaluación incorpora conocimientos obtenidos mediante la observación y la experimentación, ampliamente publicados, revisados ​​por los neurocientíficos más eminentes y confirmados en entornos clínicos.</p>
+                <p>Quizás hayas notado la naturaleza repetitiva de varias preguntas; esto es deliberado para que ninguna pregunta sesgue el resultado general.</p>
+				<p><b>P. ¿Cómo revela una prueba de verdadero-falso la química del cerebro?</b></p>
+				<p>A. La evaluación es el inicio de una conversación interna, que puede continuar con su médico si es necesario. Ninguna prueba puede revelar la química cerebral por completo. Sus respuestas a estas preguntas revelan patrones de pensamiento y comportamiento directamente relacionados con los neurotransmisores cerebrales. Por ejemplo, el neurotransmisor dopamina es una sustancia bioquímica excitatoria que, en abundancia, proporciona energía física, energía mental, motivación intensa, alto deseo sexual, rapidez de pensamiento y procesamiento, y la capacidad de combatir los antojos. Si carece de todas o algunas de estas habilidades y comportamientos (como revelarán las preguntas de esta prueba), hemos descubierto que lo más probable es que tenga una deficiencia de dopamina.</p>
+				<p>La investigación es abrumadora. Se ha descubierto que las personas solitarias, deprimidas e introvertidas crónicamente presentan deficiencias de dopamina. Quienes consumen sustancias dopaminérgicas como la cafeína o incluso las anfetaminas están extrovirtiendo su cerebro y se comportan de forma diferente a como se expresaría su naturaleza. Con la ayuda de estos potenciadores de la dopamina, exhiben un comportamiento similar al de una persona con predominio de dopamina.</p>
+				<p>Si usted es intuitivo, con procesos cognitivos muy activos y alta capacidad de aprendizaje, estas características se han vinculado con la dominancia de acetilcolina. Deficiencias de esta naturaleza pueden estar asociadas con trastornos de atención , psicosis y adicción a la nicotina.</p>
+				<p><b>P. ¿En qué se diferencia la evaluación de otras pruebas de perfil psicológico ampliamente conocidas?</b></p>
+				<p>A. La profesión psiquiátrica ha realizado una labor notable al diseñar pruebas que revelan rasgos de personalidad según el estado mental. La naturaleza de una persona es la combinación de personalidad, memoria, atención y salud física. La Evaluación de la Naturaleza Braverman es el primer instrumento que evalúa todos estos aspectos.</p>
+				<p><b>P. ¿Qué pasa si no puedo decidir fácilmente una respuesta para un gran porcentaje de las preguntas?</b></p>
+				<p>R. Aunque no lo creas, ¡esto en sí mismo dice mucho sobre tu naturaleza! Podría ser totalmente coherente con tu naturaleza dominante y tu buena salud. Sin embargo, si tienes dificultades para responder a estas preguntas, duerme bien y vuelve a intentar realizar el test. Si aún te sientes inseguro con tus respuestas, es muy probable que la indecisión se esté manifestando en otros aspectos de tu vida profesional o cotidiana. En ese caso, se recomienda una revisión médica para descartar una enfermedad subyacente como causa de tu indecisión. También te recomendamos revisar la sección sobre la naturaleza dopaminérgica. Una naturaleza dopaminérgica es capaz de tomar decisiones con claridad, y al seguir las recomendaciones de esa sección, podrías mejorar tu capacidad de decisión.</p>
+				<p><b>P. ¿ Los medicamentos o las condiciones médicas podrían influir en mi evaluación de la naturaleza?</b></p>
+				<p>A. Medicamentos como los antibióticos y la mayoría de los medicamentos de venta libre para enfermedades como el resfriado común no afectan los resultados. Si toma medicamentos que alteran la mente, como antidepresivos o tranquilizantes, o ciertas hormonas, los resultados podrían reflejar un cambio en su naturaleza. Sin embargo, esto no significa que deba dejar de tomar estos medicamentos recetados ni que no deba realizar la Evaluación de Naturaleza Braverman. La ventaja de realizar la evaluación mientras toma medicamentos es que puede indicarle si se está sobremedicando o si tiene deficiencia de alguno de los cuatro bioquímicos. ¿Está realmente en equilibrio con el uso de la medicación? Podría descubrir que ha estado tomando el medicamento equivocado o una dosis incorrecta.</p>
+				<p><b>P. ¿Es posible tener más de una naturaleza dominante?</b></p>
+				<p>A. No. Sin embargo, en algunas personas, existen dos naturalezas que influyen enormemente en la salud y el bienestar general. Muchas personas tendrán una puntuación más alta que las demás; esta puntuación refleja su naturaleza dominante. Pero algunas personas tendrán puntuaciones idénticas para dos o más naturalezas. En ese caso, determinamos su naturaleza dominante de otra manera. La progresión natural de la actividad en la onda cerebral va del lóbulo frontal (dopamina) al lóbulo temporal (GABA), al lóbulo parietal (acetilcolina) y al lóbulo occipital (serotonina). Los patrones de dominancia de las cuatro naturalezas, en relación entre sí, siguen la misma progresión, con la excepción del GAB</p>
+				<p>A. Entonces, si, por ejemplo, sus puntuaciones son idénticas para la dopamina y la acetilcolina, su naturaleza dominante es la dopamina, porque la dopamina es la primera en la secuencia. Si tuviera puntuaciones idénticas para las naturalezas GABA y serotonina, su naturaleza dominante es la serotonina.</p>
+				<p><b>P. Una vez que he identificado mi naturaleza dominante, ¿cómo puedo interpretar las cuatro puntuaciones de mi Prueba de Naturaleza Braverman juntas?</b></p>
+				<p>A. La Evaluación de la Naturaleza Braverman es única, ya que permite identificar fácilmente las causas biológicas de los problemas físicos que experimenta actualmente, además de ayudarle a equilibrar su mente y cuerpo para el resto de su vida. Esta información se obtiene analizando las cuatro puntuaciones de la Evaluación de la Naturaleza.</p>
+				<p>Aparte de tu naturaleza dominante, la siguiente pieza de información más importante se encuentra en tu puntuación más baja. Esta puntuación identifica tu lado débil o, como me gusta llamarlo, tu naturaleza opuesta. Por ejemplo, si tus puntuaciones en la prueba indican 33 dopamina, 40 acetilcolina, 15 GABA y 25 serotonina, tendrías una naturaleza acetilcólica con una naturaleza opuesta GAB</p>
+				<p>A. Recuerda, la progresión natural de una onda cerebral es del lóbulo frontal (dopamina) al lóbulo temporal (GABA) al lóbulo parietal (acetilcolina) al lóbulo occipital (serotonina). Las cuatro naturalezas siguen la misma progresión, con la excepción de GAB</p>
+				<p>A. Si tuvieras dos puntuaciones más bajas idénticas (por ejemplo, 15 dopamina, 15 serotonina), la naturaleza que aparezca primero en la secuencia se consideraría tu naturaleza opuesta. Sin embargo, si tuvieras puntuaciones bajas idénticas para GABA y serotonina, tu naturaleza opuesta es la serotonina.</p>
+				<p>Si bien es importante identificar tu naturaleza dominante, no podrás alcanzar el Efecto Máximo de la Ventaja a menos que aprendas a equilibrar las cuatro naturalezas. El primer paso es reconocer y potenciar tu naturaleza dominante mediante los programas específicos para cada naturaleza. Una vez que te sientas bien, puedes empezar a poner en forma tu naturaleza opuesta. Por último, sigue los programas para las dos naturalezas restantes. Cuando todas tus naturalezas estén equilibradas, alcanzarás el Efecto Máximo de la Ventaja y disfrutarás de una salud óptima.</p>
+				<p><b>P. ¿Cuál es la relación entre mi naturaleza dominante y mis deficiencias?</b></p>
+				<p>A. La mayoría de las personas pueden identificar una deficiencia en su naturaleza dominante antes que una deficiencia en cualquier otra naturaleza. Esto ocurre cuando nos sentimos menos " nosotros mismos". Sin embargo, compara tu naturaleza opuesta en la Evaluación de la Naturaleza Braverman con tu naturaleza deficiente en la segunda parte de la prueba. En la mayoría de los casos, encontrarás que son iguales. Esto demuestra el deseo del cerebro y el cuerpo de mantener el equilibrio. Cuando esto ocurre, tu cuerpo te está indicando que te esfuerces por alcanzar el equilibrio anterior. Sin embargo, ese equilibrio no debería ser tu único objetivo. Para alcanzar el Efecto Máximo de la Frontera, puedes alcanzar un estado en el que experimentes la intensidad, el entusiasmo, la organización y la serenidad totales del equilibrio total. Esto solo se puede lograr potenciando cada rincón de la frontera y trabajando en todas tus naturalezas.</p>
+				<p><b>P. ¿Existe una conexión entre construir relaciones exitosas e identificar mi naturaleza dominante?</b></p>
+				<p>A. ¡Sí! Tu naturaleza es un factor importante para determinar tu biotemperamento y personalidad, así como para identificar a la pareja ideal que se ajuste a tus deseos y necesidades. Como dice el dicho, los polos opuestos se atraen. Quizás descubras que tu pareja o cónyuge posee las cualidades de tu naturaleza opuesta. Si es así, probablemente tengan una relación equilibrada basada en complementar las debilidades y potenciar las fortalezas del otro.</p>
+				<p>Por el contrario, las naturalezas se emparejan por su correlación con los interruptores binarios de encendido/apagado del cerebro. Estos pares también crean relaciones . Por ejemplo, la dopamina y la acetilcolina son los interruptores relacionados con la rapidez y la velocidad: intensidad y entusiasmo en el romance, el amor y el sexo.</p><p> Una acetilcolina Expresa una alta intensidad de sentimiento, donde el romance domina la vida. Cuando la dopamina es dominante, promueve la eficiencia cognitiva. Juntos, son un símbolo de amor romántico de alto voltaje. Esta combinación es lo que buscan los romances de Hollywood: la marca de la mente y el pensamiento románticos occidentales. Por otro lado, los interruptores de "desactivación" del GABA y la serotonina a menudo se combinan. Las personas con GABA poseen una sensibilidad serena, así como la capacidad empática de aliviar el dolor. Cuando se combinan con la serotonina, donde el GABA es dominante, la combinación de ambos maximiza el estilo de vida oriental, libre de dolor y despreocupado. Cuando la serotonina es dominante, se enfatiza la felicidad, la alegría y la risa en todo su poder curativo.</p>
+				<p>También se pueden encontrar relaciones estables cuando se emparejan personas de la misma naturaleza. Sin embargo, inevitablemente alguien cae en una deficiencia, y este tipo de relación se resiente cuando el otro no logra adaptarse al desequilibrio.</p>
+				<p>En todas estas relaciones, el equilibrio a lo largo de la vida no se puede mantener con las elecciones de pareja. La naturaleza humana nos impulsa a intentar cambiar a nuestra pareja en lugar de trabajar en nosotros mismos cuando reconocemos un problema. Por lo tanto, la señal de una relación fallida es cuando las personas intentan adaptarse mutuamente a su naturaleza. En cambio, necesitas equilibrarte potenciando cada una de las cuatro naturalezas bioquímicas.</p>
+				<p><b>P. ¿ A qué edad puedes evaluar tu naturaleza dominante?</b></p>
+				<p>A. Muchas de las preguntas que componen esta prueba no son apropiadas para niños. Recomiendo realizar la primera prueba alrededor de los trece años, cuando probablemente ya haya comenzado la pubertad. A esa edad, los sexos divergen y nuestra personalidad y temperamento definen nuestra identidad. Al realizar la prueba a pacientes más jóvenes, los padres deben estar presentes y asegurarse de que se pasen por alto las preguntas inapropiadas . Omitir algunas preguntas no sesgará el resultado.</p>
+				<p><b>P. ¿Qué significa si tengo múltiples deficiencias?</b></p>
+				<p>A. Las deficiencias en áreas distintas a su naturaleza dominante a menudo se manifiestan como una enfermedad antes de que se manifieste una deficiencia de naturaleza dominante (lo que le hace sentir que "no es usted mismo"). Muchos problemas de salud se presentan como una serie de síntomas complejos que pueden atribuirse a más de una naturaleza. Por lo tanto, el tratamiento debe abordar múltiples desequilibrios químicos. Por ejemplo, los problemas de memoria asociados con la naturaleza de la acetilcolina suelen ir acompañados de alteraciones del sueño causadas por una deficiencia de serotonina. Si presenta deficiencias moderadas o graves en varias categorías, asegúrese de revisar todas las secciones correspondientes para obtener una visión completa de su salud actual.</p>
+				<p><b>P. ¿Puede mi naturaleza dominante cambiar?¿Ertime? Si es así, ¿cómo lo sé?</b></p>
+				<p>A. Las naturalezas dominantes no cambian. Se establecen al nacer y alcanzan su madurez al inicio de la pubertad, alrededor de los trece años. Sin embargo, la salud o el equilibrio de nuestra naturaleza dominante puede cambiar periódicamente. Por ejemplo, se puede tener una naturaleza dopaminérgica y desarrollar una deficiencia de dopamina. Se daría cuenta de este problema si obtuviera una puntuación alta en ambas partes de la prueba dentro de la misma categoría ( en este caso, puntuaciones altas tanto en IA como en 2A).</p>
+				</p>Todos somos una mezcla de diversas naturalezas. Generalmente, siempre tenemos una naturaleza dominante. Sin embargo, es indudable que las naturalezas pueden fluctuar: podrías ser más fuerte en una naturaleza hoy y dominante en otra cuando te sientas más descansado. Los temperamentos bioquímicos también pueden fluctuar debido a una enfermedad. A veces, las personas no se conocen bien a sí mismas o tienen dificultad para identificar los síntomas que experimentan.</p>
+				<p><b>P. ¿Puedo volver a realizar la Evaluación de Naturaleza Braverman? De ser así, ¿cuánto tiempo debo esperar ?</b></p>
+				<p>A. Aunque tu naturaleza dominante no cambia en esencia, puedes modificarla ligeramente según cómo cuides tu cuerpo y tu mente. Puedes usar la Parte 2 del test para determinar tu éxito en equilibrar la química de tu cerebro.</p>
+				<p>Repita la Evaluación Braverman siempre que se sienta notablemente diferente durante una semana o más, haga un cambio importante en su programa de vitaminas o medicamentos, o experimente un evento que le cambie la vida, como la muerte de un ser querido, un divorcio o una enfermedad grave. Deje pasar al menos un mes entre evaluaciones. No es tan importante definir su naturaleza dominante como tener la capacidad de equilibrar su mente y aprovechar las fortalezas de todas las naturalezas en su beneficio.</p>
+				<p>Si tus resultados muestran una distribución equitativa entre todas las naturalezas (ninguna es dominante), estás cerca de equilibrar tu cerebro. Si es así, ¿cuál es tu naturaleza? Entonces estás listo para potenciar tu naturaleza potenciando la bioquímica que te resulte más atractiva para tu temperamento. Por ejemplo, si quieres ser más extrovertido, puedes aprender a aumentar tu dopamina; si quieres pensar de forma más creativa, puedes aumentar tus niveles de acetilcolina.</p>
+				<p><b>P. ¿Qué papel juega la genética en la determinación de mi naturaleza dominante ?</b></p>
+				<p>A. La genética es clave para tu naturaleza dominante. Las personas que muestran dominio en una naturaleza específica están predispuestas a una mayor producción y transmisión de ese neurotransmisor específico. También puedes estar predispuesto a enfermedades causadas por deficiencias genéticas o en otras naturalezas. Nuestras investigaciones demuestran que los niveles bajos de dopamina, por ejemplo, se asocian con la obesidad, la adicción, el alcoholismo, el comportamiento antisocial y la timidez.</p>
+				<p><b>P. Si aumento un neurotransmisor, ¿no se creará un nuevo desequilibrio?</b></p>
+				<p>A. Cada cerebro funciona naturalmente con cierto nivel de desequilibrio. Esto es lo que nos hace únicos. Por lo tanto, los resultados del Test de Naturaleza Braverman mostrarán cierta preferencia por una naturaleza sobre otra. También puedes optar por potenciar una naturaleza según sea necesario: si necesitas trabajar hasta tarde, puedes aumentar tu dopamina; si vas a la ópera y necesitas estar quieto, puedes aumentar tu acetilcolina y GAB</p>
+				<p>A. No estás creando un desequilibrio, sino potenciando una naturaleza, y lo estás haciendo temporalmente. Esto no cambiará el funcionamiento de tu cerebro. Simplemente estás aumentando la producción de una sustancia bioquímica específica.</p>
+				<h3>HACIA EL EQUILIBRIO</h3>
+				</p>Ya has identificado tu naturaleza dominante y descubierto las deficiencias que puedas tener en las demás naturalezas. El resto del libro te mostrará cómo optimizar tu naturaleza dominante, revertir cualquier deficiencia que puedas tener y mantener el equilibrio de los cuatro neurotransmisores para una salud diaria y duradera .</p><p>Tu naturaleza dominante determina cómo debes tratarte ante cualquier afección y cómo puedes mantener una salud óptima . Al identificar esta bioquímica, podrás prever posibles afecciones médicas y tomar medidas para prevenirlas. Además, podrás mejorar tu memoria. Finalmente, comprenderás mejor qué impulsa tu personalidad y aprenderás a modificar sus aspectos menos favorables.</p>
+				<p>La segunda parte del libro describe cuatro programas distintos para una salud integral. Cada uno representa una de las naturalezas dominantes y contiene un plan diversificado para abordar sus necesidades específicas. Primero, lea el capítulo sobre su naturaleza dominante. Luego, lea el capítulo sobre la naturaleza que más le falta. La combinación de ambos le permitirá alcanzar una salud óptima. Puede profundizar esta comprensión leyendo sobre las dos naturalezas restantes, especialmente si padece alguna dolencia específica que no se trate en las dos primeras. Por ejemplo, si tiene bajos niveles de energía, lea el capítulo sobre la dopamina. El capítulo sobre la acetilcolina podría resolver sus problemas de memoria. Si se siente ansioso, lea más sobre el GAB</p>
+				<p>A. Y si necesita saber cómo dormir mejor, consulte el capítulo sobre la serotonina.</p>
+				</div>
+			</div>	
+				
+				
+                
+                
+        </div>
+
+        <footer>
+            <p>Evaluación de la Naturaleza de Braverman - Sitio Educativo Interactivo</p>
+            <p>Esta herramienta tiene fines educativos y no sustituye el diagnóstico médico profesional.</p>
+        </footer>
+    </div>
+
+   <script src="personal.js"></script>
+</body>
+</html>
