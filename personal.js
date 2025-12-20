@@ -210,7 +210,7 @@
                 {text:"Tengo mal carácter",category:"1A",tipo:"FÍSICO"},
                 {text:"Sólo como para revitalizar mi cuerpo",category:"1A",tipo:"FÍSICO"},
                 {text:"Me encantan las películas de acción",category:"1A",tipo:"FÍSICO"},
-                {text:"Hacer ejercicio me hace sentir poderosa",category:"1A",tipo:"FÍSICO"},
+                {text:"Hacer ejercicio me hace sentir una persona poderosa",category:"1A",tipo:"FÍSICO"},
                 {text:"Soy una persona muy dominante",category:"1A",tipo:"PERSONALIDAD"},
                 {text:"A veces no me doy cuenta de mis sentimientos",category:"1A",tipo:"PERSONALIDAD"},
                 {text:"A menudo tengo problemas para escuchar a los demás porque mis propias ideas dominan",category:"1A",tipo:"PERSONALIDAD"},
